@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shorem Calculator</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .calculator {
+      background-color: #000;
+      border-radius: 20px;
+      padding: 20px;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .display {
+      background-color: #333;
+      color: white;
+      font-size: 2.5em;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: right;
+      margin-bottom: 10px;
+      word-wrap: break-word;
+      min-height: 60px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      font-size: 1.4em;
+      padding: 15px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-operator {
+      background-color: orange;
+      color: white;
+    }
+
+    .btn-number {
+      background-color: #333;
+      color: white;
+    }
+
+    .btn-clear {
+      background-color: #999;
+      color: black;
+    }
+
+    .btn-equal {
+      background-color: green;
+      color: white;
+      grid-column: span 2;
+      border-radius: 30px;
+    }
+
+    .btn-zero {
+      grid-column: span 2;
+      border-radius: 30px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+    }
+
+    @media (max-width: 400px) {
+      .display {
+        font-size: 2em;
+      }
+
+      button {
+        font-size: 1.2em;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="btn-clear" onclick="clearDisplay()">C</button>
+      <button class="btn-operator" onclick="appendOperator('/')">÷</button>
+      <button class="btn-operator" onclick="appendOperator('*')">×</button>
+      <button class="btn-operator" onclick="appendOperator('-')">−</button>
+
+      <button class="btn-number" onclick="appendNumber('7')">7</button>
+      <button class="btn-number" onclick="appendNumber('8')">8</button>
+      <button class="btn-number" onclick="appendNumber('9')">9</button>
+      <button class="btn-operator" onclick="appendOperator('+')">+</button>
+
+      <button class="btn-number" onclick="appendNumber('4')">4</button>
+      <button class="btn-number" onclick="appendNumber('5')">5</button>
+      <button class="btn-number" onclick="appendNumber('6')">6</button>
+      <button class="btn-equal" onclick="calculate()">=</button>
+
+      <button class="btn-number" onclick="appendNumber('1')">1</button>
+      <button class="btn-number" onclick="appendNumber('2')">2</button>
+      <button class="btn-number" onclick="appendNumber('3')">3</button>
+
+      <button class="btn-number btn-zero" onclick="appendNumber('0')">0</button>
+      <button class="btn-number" onclick="appendNumber('.')">.</button>
+    </div>
+  </div>
+  <div class="footer">Made by Shorem in India</div>
+
+  <script>
+    let display = document.getElementById("display");
+
+    function appendNumber(number) {
+      if (display.innerText === "0") {
+        display.innerText = number;
+      } else {
+        display.innerText += number;
+      }
+    }
+
+    function appendOperator(operator) {
+      const lastChar = display.innerText.slice(-1);
+      if ("+-*/".includes(lastChar)) {
+        display.innerText = display.innerText.slice(0, -1) + operator;
+      } else {
+        display.innerText += operator;
+      }
+    }
+
+    function clearDisplay() {
+      display.innerText = "0";
+    }
+
+    function calculate() {
+      try {
+        display.innerText = eval(display.innerText).toString();
+      } catch {
+        display.innerText = "Error";
+      }
+    }
+  </script>
+</b Shoremhussain/Calculator-ios-
